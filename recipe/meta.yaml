@@ -33,7 +33,7 @@ test:
     - tornado
     - jupyter_server
     - pytest-tornasync
-    - pytest_jupyter
+    - pytest-jupyter
   imports:
     - jupyter_server_mathjax
   commands:
