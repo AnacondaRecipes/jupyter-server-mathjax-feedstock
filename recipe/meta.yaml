@@ -21,9 +21,9 @@ requirements:
     - wheel
     - pip
     - jupyter-packaging >=0.10,<2
-    - jupyter_server >=1.1
   run:
     - python
+    - jupyter_server >=1.1
 
 test:
   requires:
@@ -31,7 +31,6 @@ test:
     - pytest
     - traitlets
     - tornado
-    - jupyter_server
     - pytest-tornasync
     - pytest-jupyter
   imports:
