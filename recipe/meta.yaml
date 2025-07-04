@@ -10,37 +10,46 @@ source:
   sha256: bb1e6b6dc0686c1fe386a22b5886163db548893a99c2810c36399e9c4ca23943
 
 build:
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  skip: true # [py<37 or s390x]
+  skip: true # [py<37]
 
 requirements:
   host:
     - python
-    - jupyter-packaging >=0.10,<2
-    - nodejs 18.16.0
+    - setuptools
+    - wheel
     - pip
+    - jupyter-packaging >=0.10,<2
   run:
     - python
-    - jupyter_server >=1.1,<3
+    - jupyter_server >=1.1
 
 test:
   requires:
     - pip
+    - pytest
+    - traitlets
+    - tornado
+    - pytest-tornasync
+    - pytest-jupyter
   imports:
     - jupyter_server_mathjax
   commands:
     - pip check
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
+    - pytest --pyargs jupyter_server_mathjax
     - jupyter server extension list 2>&1 | grep -ie "jupyter_server_mathjax.*OK"
 
 about:
-  home: https://github.com/jupyter-server/jupyter_server_mathjax/
+  home: https://github.com/jupyter-server/jupyter_server_mathjax
   license: BSD-3-Clause
   license_family: BSD
   license_file: LICENSE
-  summary: MathJax resources as a Jupyter Server Extension.
-  dev_url: https://github.com/jupyter-server/jupyter_server_mathjax/
-  doc_url: https://github.com/jupyter-server/jupyter_server_mathjax/
+  summary: MathJax resources endpoints for Jupyter Server.
+  description: MathJax resources endpoints for Jupyter Server.
+  dev_url: https://github.com/jupyter-server/jupyter_server_mathjax
+  doc_url: https://github.com/jupyter-server/jupyter_server_mathjax/blob/main/README.md
 
 extra:
   recipe-maintainers:
