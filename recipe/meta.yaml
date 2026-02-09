@@ -33,6 +33,7 @@ test:
     - tornado
     - pytest-tornasync
     - pytest-jupyter
+    - msys2-grep  # [win]
   imports:
     - jupyter_server_mathjax
   commands:
